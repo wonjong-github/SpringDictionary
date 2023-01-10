@@ -23,6 +23,8 @@ public class ProductDBRepository {
         product2.setName("삼성 건조기");
         product2.setPrice(1200000L);
         DB.put(product2.getId(), product2);
+
+
     }
 
     public Product getProduct(Long id){

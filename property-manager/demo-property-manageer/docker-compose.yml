@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+
+  property_database:
+    image: mysql:5
+    networks:
+      - property-manager-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=property_manager
+
+  property-manager-app:
+    image: hyunsooryu/property-manager-app
+    networks:
+      - property-manager-network
+    ports:
+      - "80:8080"
+    depends_on:
+      - property_database
+
+networks:
+  property-manager-network:

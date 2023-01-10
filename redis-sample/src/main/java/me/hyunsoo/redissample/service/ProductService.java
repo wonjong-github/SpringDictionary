@@ -20,6 +20,9 @@ public class ProductService {
 
     public Product getProduct(Long id){
         //CACHE 에서 검색
+
+
+
         return productRepository.findById(id).orElseGet(
                 ()->{
                     Product foundFromDB = productDBRepository.getProduct(id);
