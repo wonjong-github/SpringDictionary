@@ -8,4 +8,6 @@ WORKDIR /usr/local/bin/
 
 COPY target/demo-property-manager-0.0.1-SNAPSHOT.jar application.jar
 
-CMD ["java","-Dspring.profiles.active=docker","-jar","application.jar"]
+# CMD ["java","-Dspring.profiles.active=docker","-jar","application.jar"]
+
+CMD ["java","-jar","application.jar"]
