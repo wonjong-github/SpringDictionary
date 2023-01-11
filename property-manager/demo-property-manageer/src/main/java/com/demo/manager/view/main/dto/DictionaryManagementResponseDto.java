@@ -1,6 +1,7 @@
 package com.demo.manager.view.main.dto;
 
 
+import com.demo.manager.domain.Dictionary;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -25,6 +26,13 @@ public class DictionaryManagementResponseDto {
                 .key(key)
                 .value(value)
                 .code("0000")
+                .build();
+    }
+
+    public static DictionaryManagementResponseDto convert(Dictionary dictionary){
+        return DictionaryManagementResponseDto.builder()
+                .key(dictionary.getKey())
+                .value(dictionary.getValue())
                 .build();
     }
 
