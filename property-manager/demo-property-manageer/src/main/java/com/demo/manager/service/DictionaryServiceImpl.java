@@ -5,12 +5,18 @@ import com.demo.manager.domain.Dictionary;
 import com.demo.manager.view.main.dto.DictionaryManagementRequestDto;
 import com.demo.manager.view.main.dto.DictionaryManagementResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -48,5 +54,15 @@ public class DictionaryServiceImpl implements DictionaryService {
         Dictionary dictionary = new Dictionary(dictionaryManagementRequestDto.getKey(), dictionaryManagementRequestDto.getValue());
         dicitionaryRepository.save(dictionary);
         return "SAVED";
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<DictionaryManagementResponseDto> getDictionaryByPage(Pageable pageable) {
+        Page<Dictionary> dictionaries = dicitionaryRepository.findAll(pageable);
+
+        return dictionaries.stream()
+                .map(DictionaryManagementResponseDto::convert)
+                .collect(Collectors.toList());
     }
 }
